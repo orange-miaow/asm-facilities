@@ -19,7 +19,7 @@ class GeneratingFacilityTest {
         }};
 
         byte[] bytes = GeneratingFacility.generateBeanClassByteArray(className, null, propertyDefinitions);
-        Class<?> clazz = new MyClassLoader().defineClass(className, bytes);
+        Class<?> clazz = new MyClassLoader(GeneratingFacilityTest.class.getClassLoader()).defineClass(className, bytes);
 
         Object object = clazz.getDeclaredConstructor().newInstance();
         clazz.getMethod("setId", long.class).invoke(object, 10001L);
